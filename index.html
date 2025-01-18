@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO LIST</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .con {
+            width: 450px;
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            flex: 1;
+            height: 40px;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #007bff;
+        }
+
+        button {
+            height: 40px;
+            padding: 0 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .text ul {
+            list-style-type: none;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .text ul li {
+            flex: 1;
+        }
+
+        .text ul i {
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        #clearAll {
+            margin-top: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+        <h1>TODO LIST</h1>
+        <div class="input">
+            <input type="text" id="itemInput" placeholder="Type here to add task">
+            <button id="add" onclick="add()">Add</button>
+        </div>
+        <div class="text"></div>
+        <button id="clearAll" onclick="clearAll()">Clear All</button>
+    </div>
+
+    <script>
+        let inputField = document.getElementById("itemInput");
+        let textContainer = document.querySelector(".text");
+
+        function add() {
+            if (inputField.value.trim() === "") {
+                alert("Please enter a task");
+                return;
+            }
+
+            // Create a new task element
+            let newTask = document.createElement("ul");
+
+            newTask.innerHTML = `
+                <li>${inputField.value}</li>
+                <i class="fa-solid fa-trash" onclick="removeTask(this)"></i>
+            `;
+
+            textContainer.appendChild(newTask);
+            inputField.value = ""; // Clear the input field
+        }
+
+        function removeTask(icon) {
+            icon.parentElement.remove();
+        }
+
+        function clearAll() {
+            textContainer.innerHTML = "";
+        }
+    </script>
+</body>
+</html>
